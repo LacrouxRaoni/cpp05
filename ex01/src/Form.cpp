@@ -1,10 +1,10 @@
 #include "Form.hpp"
 
-Form::Form() : name("Default"), grade(1), gradeToSign(1)
+Form::Form() : name("Default"), signedForm(false), grade(1), gradeToSign(1)
 {
 }
 
-Form::Form(std::string name, int grade, int gradeToSign) : name(name), grade(grade), gradeToSign(gradeToSign), signedForm(false)
+Form::Form(std::string name, int grade, int gradeToSign) : name(name), signedForm(false), grade(grade), gradeToSign(gradeToSign)
 {
 	if (grade < 1 || gradeToSign < 1)
 		throw GradeTooHighException();
@@ -15,7 +15,7 @@ Form::Form(std::string name, int grade, int gradeToSign) : name(name), grade(gra
 Form::~Form(){
 }
 
-Form::Form(const Form& form) : name(name), grade(grade), gradeToSign(gradeToSign), signedForm(false)
+Form::Form(const Form& form) : name(form.getName()), signedForm(form.getSignedForm()), grade(form.getGrade()), gradeToSign(form.getGradeToSign())
 {
 	*this = form;
 }
@@ -49,17 +49,14 @@ int Form::getGradeToSign() const
 	return this->gradeToSign;
 }
 
-void Form::beSigned()
+void Form::beSigned(const Bureaucrat &bureaucrat)
 {
-
-}
-
-void Form::signForm()
-{
-
+	if (bureaucrat.getGrade() > this->getGradeToSign())
+		throw GradeTooLowException();
+	this->signedForm = true;
 }
 
 std::ostream& operator<<(std::ostream &rhs, const Form &lhs){
-	
+	rhs << lhs;
 	return rhs;
 }

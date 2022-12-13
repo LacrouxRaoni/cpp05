@@ -54,6 +54,18 @@ void Bureaucrat::decrementBureaucratGrade()
 	grade++;
 }
 
+void Bureaucrat::signForm(Form &form)
+{
+	if (form.getSignedForm() == true)
+	{
+		std::cout << this->getName() << " signed " << form.getName() << std::endl;
+	} else 
+	{
+		std::cout << this->getName() << " couldn’t sign " << form.getName() << " because ";
+	}
+
+}
+
 std::ostream& operator<<(std::ostream& rhs, const Bureaucrat &lhs){
 	rhs << lhs.getName() << ", bureaucrat grade " << lhs.getGrade();
 	return rhs;
