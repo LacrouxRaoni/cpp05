@@ -2,6 +2,7 @@
 #define ROBOTOMYREQUESTFORM_HPP
 
 #include "AForm.hpp"
+#include <stdlib.h>
 
 class RobotomyRequestForm : AForm
 {
@@ -14,6 +15,7 @@ class RobotomyRequestForm : AForm
 		RobotomyRequestForm(RobotomyRequestForm& robotomyRequestForm);
 		RobotomyRequestForm& operator=(RobotomyRequestForm& robotomyRequestForm);
 		std::string getTarget();
+		void execute(Bureaucrat const& executor) const;
 };
 
 #endif

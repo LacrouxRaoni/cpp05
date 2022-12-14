@@ -16,14 +16,15 @@ class AForm
 	public:
 		AForm();
 		AForm(const std::string name, int grade, int gradeToSign);
-		~AForm();
+		virtual ~AForm();
 		AForm(const AForm& form);
 		AForm& operator=(const AForm& form);
 		const std::string& getName() const;
 		bool getSignedForm() const;
 		int getGrade() const;
 		int getGradeToSign() const;
-		void beSigned(const Bureaucrat &bureaucrat);		
+		void beSigned(const Bureaucrat &bureaucrat);
+		virtual void execute(Bureaucrat const& executor) const;
 		
 		class GradeTooHighException : public std::exception
 		{
@@ -43,6 +44,32 @@ class AForm
 				}
 		};
 
+		class FormNotSignedException : public std::exception
+		{
+			public:
+				const char* what() const throw()
+				{
+					return "Form not signed yet";
+				}
+		};
+
+		class FormSignedException : public std::exception
+		{
+			public:
+				const char* what() const throw()
+				{
+					return "Form has been signed already";
+				}
+		};
+
+		class OpenFileException : public std::exception
+		{
+			public:
+				const char* what() const throw()
+				{
+					return "File can't be opened";
+				}
+		};
 };
 
 std::ostream& operator<<(std::ostream &rhs, const AForm& lhs);
