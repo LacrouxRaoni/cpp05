@@ -4,7 +4,7 @@
 #include "AForm.hpp"
 #include <stdlib.h>
 
-class RobotomyRequestForm : AForm
+class RobotomyRequestForm : public AForm
 {
 	private:
 		std::string target;

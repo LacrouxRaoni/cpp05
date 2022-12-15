@@ -77,7 +77,7 @@ void Bureaucrat::executeForm(AForm const& form)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cout << "Bureaucrat " << e.what() << std::endl;
 	}
 }
 
